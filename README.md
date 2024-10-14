@@ -80,24 +80,7 @@ alter table price_items add "categoryId" numeric(10,2);
 ```
 alter table @table_name drop columm column_name
 ```
-
-## Dump Database
-
-### If you don't know password to postgres user
-
-#### 1. Enter to postgres user
-```
-su - postgres
-```
-#### 2. Enter the shell
-```
-psql
-```
-#### 3. Change the password
-```
-ALTER USER postgres PASSWORD 'mynewpassword';
-```
-### Dump & Restore
+## Dump & Restore
 
 #### 1. From the docker
 ```
