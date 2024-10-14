@@ -97,22 +97,17 @@ psql
 ```
 ALTER USER postgres PASSWORD 'mynewpassword';
 ```
-### Dump
+### Dump & Restore
 
-#### 1. Create dir for backups
+#### 1. From the docker
 ```
-mkdir backups
+docker exec postgres pg_dump -U whale -F t whalebase | gzip > dump_$(date +%d-%m-%Y).tar.gz
 ```
-#### 2. Give access
+#### 3. Extract
 ```
-chmod 0777 backups
+gzip -dk dump_02-10-2024.tar.gz
 ```
-#### 3. Enter the postgres user
+#### 2. Restore
 ```
-su - postgres
-```
-#### 4. Create Dump and enter the password
-```
-pg_dump -h localhost @database > @dump_filename
-
+docker exec -i postgres pg_restore -U whale --verbose --clean --no-acl --if-exists -d whalebase < dump_02-10-2024.tar
 ```
